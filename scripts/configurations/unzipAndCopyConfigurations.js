@@ -47,6 +47,7 @@ module.exports = function(context) {
   var fileName = files.find(function (name) {
     return name.endsWith(platformConfig.firebaseFileExtension);
   });
+  
   if (!fileName) {
     utils.handleError("No file found", defer);
   }
@@ -74,14 +75,14 @@ module.exports = function(context) {
     }
     
     sourceFilePath = path.join(targetPath, gtmFile);
-    destFilePath = path.join(context.opts.plugin.dir, gtmFile);
+    destFilePath = path.join(context.opts.plugin.dir, 'GTM.json');
   
     utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
   
     if (cordovaAbove7) {
       var destPath = path.join(context.opts.projectRoot, "platforms", platform, "app");
       if (utils.checkIfFolderExists(destPath)) {
-        var destFilePath = path.join(destPath, gtmFile);
+        var destFilePath = path.join(destPath, 'GTM.json');
         utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
       }
     }
