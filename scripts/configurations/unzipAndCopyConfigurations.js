@@ -2,18 +2,15 @@
 
 var path = require("path");
 var AdmZip = require("adm-zip");
-var process = require('process');
 
 var utils = require("./utilities");
 
 var constants = {
-  googleServices: "google-services"
+  googleServices: "google-services",
+  zipExtension: ".zip"
 };
 
 module.exports = function(context) {
-  console.log(process.arv);
-  console.log(context.opts.plugin.pluginInfo);
-
   var cordovaAbove8 = utils.isCordovaAbove(context, 8);
   var cordovaAbove7 = utils.isCordovaAbove(context, 7);
   var defer;
@@ -34,7 +31,10 @@ module.exports = function(context) {
   
   var googleServicesZipFile = utils.getZipFile(sourceFolderPath, constants.googleServices);
   if (!googleServicesZipFile) {
-    utils.handleError("No zip file found containing google services configuration file", defer);
+    var googleServicesZipFile = utils.getZipFile(sourceFolderPath, constants.googleServices + constants.zipExtension);
+    if (!googleServicesZipFile) {
+      utils.handleError("No zip file found containing google services configuration file", defer);
+    }
   }
 
   var zip = new AdmZip(googleServicesZipFile);
@@ -74,7 +74,7 @@ module.exports = function(context) {
   // Copy GTM-XXXXXX.json
   var gtmId = utils.getPreferenceValue('GTM_ID');
   if (gtmId != null && gtmId !== '' && typeof(gtmId) !== 'undefined') {
-    var gtmFile = files.filter(x => path.basename(x) === platformConfig.gtmFileNamePrefix + gtmId + platformConfig.gtmFileNameSuffix)[0];
+    var gtmFile = files.filter(x => path.basename(x).startsWith(platformConfig.gtmFileNamePrefix) && path.basename(x).endsWith(platformConfig.gtmFileNameSuffix))[0];
 
     if (!gtmFile) {
       console.log("No GTM-" + gtmId + ".json file found");

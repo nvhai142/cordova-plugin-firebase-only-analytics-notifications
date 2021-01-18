@@ -63,7 +63,7 @@
     </config-file>
 
     <resource-file src="google-services.json" target="./google-services.json" />
-    <resource-file src="GTM.json" target="app/src/main/assets/containers/GTM-$GTM_ID.json" />
+    <resource-file src="GTM.json" target="app/src/main/assets/containers/GTM-XYZ.json" />
 
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
@@ -102,7 +102,7 @@
     </config-file>
 
     <resource-file src="GoogleService-Info.plist" target="./GoogleService-Info.plist" />
-    <resource-file src="GTM.json" target="./GTM-$GTM_ID.json" />
+    <resource-file src="GTM.json" target="./GTM-XYZ.json" />
 
     <header-file src="src/ios/AppDelegate+FirebasePlugin.h" />
     <source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
