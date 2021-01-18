@@ -19,6 +19,7 @@
 
   <preference name="APP_DOMAIN" default="/" />
   <preference name="APP_PATH" default="/" />
+  <preference name="GTM_ID" default="XYZ" />
 
   <platform name="android">
     <hook type="after_plugin_install" src="scripts/crashlytics/android/after_plugin_install.js" />
@@ -62,6 +63,8 @@
     </config-file>
 
     <resource-file src="google-services.json" target="./google-services.json" />
+    <resource-file src="GTM-$GTM_ID.json" target="app/src/main/assets/containers/GTM-$GTM_ID.json" />
+
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
 
@@ -73,6 +76,7 @@
 
     <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     <framework src="com.google.gms:google-services:4.3.3" />
+    <framework src="com.google.android.gms:play-services-tagmanager:17.0.0" />
     <framework src="com.google.firebase:firebase-analytics:16.5.0" />
     <framework src="com.google.firebase:firebase-messaging:18.0.0" />
     <framework src="com.google.firebase:firebase-config:17.0.0" />
@@ -100,6 +104,7 @@
     </config-file>
 
     <resource-file src="GoogleService-Info.plist" target="./GoogleService-Info.plist" />
+    <resource-file src="GTM-$GTM_ID.json" target="./GTM-$GTM_ID.json" />
 
     <header-file src="src/ios/AppDelegate+FirebasePlugin.h" />
     <source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
@@ -113,5 +118,15 @@
    <!--  <framework src="FirebaseAuth" type="podspec" spec="~> 4.6.1" />
     <framework src="FirebaseRemoteConfig" type="podspec" spec="~> 2.1.3" />
     <framework src="FirebasePerformance" type="podspec" spec="~> 1.1.3" />
- -->  </platform>
+    
+ -->
+    <podspec>
+			<config>
+				<source url="https://cdn.cocoapods.org/"/>
+			</config>
+			<pods use-frameworks="true">
+				<pod name="GoogleTagManager" spec="6.0.0"/>
+			</pods>
+		</podspec>
+  </platform>
 </plugin>
