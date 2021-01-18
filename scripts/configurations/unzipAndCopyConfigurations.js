@@ -6,8 +6,7 @@ var AdmZip = require("adm-zip");
 var utils = require("./utilities");
 
 var constants = {
-  googleServices: "google-services",
-  zipExtension: ".zip"
+  googleServices: "google-services"
 };
 
 module.exports = function(context) {
@@ -31,10 +30,7 @@ module.exports = function(context) {
   
   var googleServicesZipFile = utils.getZipFile(sourceFolderPath, constants.googleServices);
   if (!googleServicesZipFile) {
-    var googleServicesZipFile = utils.getZipFile(sourceFolderPath, constants.googleServices + constants.zipExtension);
-    if (!googleServicesZipFile) {
-      utils.handleError("No zip file found containing google services configuration file", defer);
-    }
+    utils.handleError("No zip file found containing google services configuration file", defer);
   }
 
   var zip = new AdmZip(googleServicesZipFile);
