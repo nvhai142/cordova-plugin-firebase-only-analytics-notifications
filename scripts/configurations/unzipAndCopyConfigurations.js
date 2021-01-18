@@ -10,6 +10,8 @@ var constants = {
 };
 
 module.exports = function(context) {
+  console.log(process.arv, context);
+
   var cordovaAbove8 = utils.isCordovaAbove(context, 8);
   var cordovaAbove7 = utils.isCordovaAbove(context, 7);
   var defer;
@@ -47,9 +49,11 @@ module.exports = function(context) {
   var fileName = files.find(function (name) {
     return name.endsWith(platformConfig.firebaseFileExtension);
   });
-  
+
   if (!fileName) {
     utils.handleError("No file found", defer);
+  } else {
+    console.log('Found: ' + fileName);
   }
 
   var sourceFilePath = path.join(targetPath, fileName);
@@ -72,6 +76,8 @@ module.exports = function(context) {
 
     if (!gtmFile) {
       console.log("No GTM-" + gtmId + ".json file found");
+    } else {
+      console.log('Found: ' + gtmFile);
     }
     
     sourceFilePath = path.join(targetPath, gtmFile);
