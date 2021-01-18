@@ -72,30 +72,25 @@ module.exports = function(context) {
   }
 
   // Copy GTM-XXXXXX.json
-  var gtmId = utils.getPreferenceValue('GTM_ID');
-  if (gtmId != null && gtmId !== '' && typeof(gtmId) !== 'undefined') {
-    var gtmFile = files.filter(x => path.basename(x).startsWith(platformConfig.gtmFileNamePrefix) && path.basename(x).endsWith(platformConfig.gtmFileNameSuffix))[0];
+  var gtmFile = files.filter(x => path.basename(x).startsWith(platformConfig.gtmFileNamePrefix) && path.basename(x).endsWith(platformConfig.gtmFileNameSuffix))[0];
 
-    if (!gtmFile) {
-      console.log("No GTM-" + gtmId + ".json file found");
-    } else {
-      console.log('Found: ' + gtmFile);
-    }
-    
-    sourceFilePath = path.join(targetPath, gtmFile);
-    destFilePath = path.join(context.opts.plugin.dir, 'GTM.json');
-  
-    utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
-  
-    if (cordovaAbove7) {
-      var destPath = path.join(context.opts.projectRoot, "platforms", platform, "app");
-      if (utils.checkIfFolderExists(destPath)) {
-        var destFilePath = path.join(destPath, 'GTM.json');
-        utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
-      }
-    }
+  if (!gtmFile) {
+    console.log("No GTM-" + gtmId + ".json file found");
   } else {
-    console.log("No GTM_ID preference specified.");
+    console.log('Found: ' + gtmFile);
+  }
+  
+  sourceFilePath = path.join(targetPath, gtmFile);
+  destFilePath = path.join(context.opts.plugin.dir, 'GTM.json');
+
+  utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
+
+  if (cordovaAbove7) {
+    var destPath = path.join(context.opts.projectRoot, "platforms", platform, "app");
+    if (utils.checkIfFolderExists(destPath)) {
+      var destFilePath = path.join(destPath, 'GTM.json');
+      utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
+    }
   }
       
   return defer.promise;
