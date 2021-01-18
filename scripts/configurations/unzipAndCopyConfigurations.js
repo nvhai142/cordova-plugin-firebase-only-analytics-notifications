@@ -47,7 +47,7 @@ module.exports = function(context) {
 
   // Copy google-services.json or GoogleService-Info.plist
   var fileName = files.find(function (name) {
-    return name.endsWith(platformConfig.firebaseFileExtension);
+    return name.endsWith(platformConfig.firebaseFileExtension) && !name.startsWith(platformConfig.gtmFileNamePrefix);
   });
 
   if (!fileName) {
