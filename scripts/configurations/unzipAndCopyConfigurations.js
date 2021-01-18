@@ -2,6 +2,7 @@
 
 var path = require("path");
 var AdmZip = require("adm-zip");
+var process = require('process');
 
 var utils = require("./utilities");
 
@@ -10,7 +11,8 @@ var constants = {
 };
 
 module.exports = function(context) {
-  console.log(process.arv, context);
+  console.log(process.arv);
+  console.log(context.opts.plugin.pluginInfo);
 
   var cordovaAbove8 = utils.isCordovaAbove(context, 8);
   var cordovaAbove7 = utils.isCordovaAbove(context, 7);

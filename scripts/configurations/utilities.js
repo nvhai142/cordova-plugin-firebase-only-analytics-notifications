@@ -2,6 +2,7 @@
 
 var path = require("path");
 var fs = require("fs");
+var process = require('process');
 
 var utils = require("../utilities");
 
