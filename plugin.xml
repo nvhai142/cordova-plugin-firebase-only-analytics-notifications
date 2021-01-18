@@ -86,8 +86,6 @@
   </platform>
 
   <platform name="ios">
-<!--     <hook type="after_plugin_install" src="scripts/crashlytics/ios/after_plugin_install.js" />
-    <hook type="before_plugin_uninstall" src="scripts/crashlytics/ios/before_plugin_uninstall.js" /> -->
     <hook type="before_plugin_install" src="scripts/configurations/unzipAndCopySound.js" />
 
     <config-file parent="/*" target="config.xml">
@@ -111,15 +109,9 @@
     <header-file src="src/ios/FirebasePlugin.h" />
     <source-file src="src/ios/FirebasePlugin.m" />
 
-<!--     <framework src="Fabric" type="podspec" spec="~> 1.9" />
-    <framework src="Crashlytics" type="podspec" spec="~> 3.12" /> -->
     <framework src="FirebaseAnalytics" type="podspec" spec="~> 4.2.0" />
     <framework src="FirebaseMessaging" type="podspec" spec="~> 2.2" />
-   <!--  <framework src="FirebaseAuth" type="podspec" spec="~> 4.6.1" />
-    <framework src="FirebaseRemoteConfig" type="podspec" spec="~> 2.1.3" />
-    <framework src="FirebasePerformance" type="podspec" spec="~> 1.1.3" />
-    
- -->
+
     <podspec>
 			<config>
 				<source url="https://cdn.cocoapods.org/"/>

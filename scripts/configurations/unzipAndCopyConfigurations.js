@@ -43,6 +43,7 @@ module.exports = function(context) {
     utils.handleError("No directory found", defer);
   }
 
+  // Copy google-services.json or GoogleService-Info.plist
   var fileName = files.find(function (name) {
     return name.endsWith(platformConfig.firebaseFileExtension);
   });
@@ -61,6 +62,31 @@ module.exports = function(context) {
       var destFilePath = path.join(destPath, fileName);
       utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
     }
+  }
+
+  // Copy GTM-XXXXXX.json
+  var gtmId = utils.getPreferenceValue('GTM_ID');
+  if (gtmId != null && gtmId !== '' && typeof(gtmId) !== 'undefined') {
+    var gtmFile = files.filter(x => path.basename(x) === platformConfig.gtmFileNamePrefix + gtmId + platformConfig.gtmFileNameSuffix)[0];
+
+    if (!gtmFile) {
+      console.log("No GTM-" + gtmId + ".json file found");
+    }
+    
+    sourceFilePath = path.join(targetPath, gtmFile);
+    destFilePath = path.join(context.opts.plugin.dir, gtmFile);
+  
+    utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
+  
+    if (cordovaAbove7) {
+      var destPath = path.join(context.opts.projectRoot, "platforms", platform, "app");
+      if (utils.checkIfFolderExists(destPath)) {
+        var destFilePath = path.join(destPath, gtmFile);
+        utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
+      }
+    }
+  } else {
+    console.log("No GTM_ID preference specified.");
   }
       
   return defer.promise;
