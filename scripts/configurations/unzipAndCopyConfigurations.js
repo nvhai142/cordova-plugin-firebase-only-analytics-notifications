@@ -73,7 +73,7 @@ module.exports = function(context) {
   var gtmFile = files.filter(x => path.basename(x).startsWith(platformConfig.gtmFileNamePrefix) && path.basename(x).endsWith(platformConfig.gtmFileNameSuffix))[0];
 
   if (!gtmFile) {
-    console.log("No GTM-" + gtmId + ".json file found");
+    console.log("No GTM-*.json file found");
   } else {
     console.log('Found: ' + gtmFile);
   }
