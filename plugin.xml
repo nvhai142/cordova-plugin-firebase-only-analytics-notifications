@@ -101,7 +101,7 @@
     </config-file>
 
     <resource-file src="GoogleService-Info.plist" target="./GoogleService-Info.plist" />
-    <resource-file src="GTM.json" target="container/GTM-XXXXXX.json" />
+    <resource-file src="GTM.json" target="./container/GTM-XXXXXX.json" />
 
     <header-file src="src/ios/AppDelegate+FirebasePlugin.h" />
     <source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
