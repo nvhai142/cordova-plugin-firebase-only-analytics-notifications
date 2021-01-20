@@ -94,6 +94,8 @@ module.exports = function(context) {
   }
 
   var sourceFilePath = path.join(targetPath, gtmFile);
+  var destination = path.join(context.opts.projectRoot, destinationPath);
+  fs.copySync(sourceFilePath, destination);
 
   if (cordovaAbove7) {
     var destPath = path.join(context.opts.projectRoot, destinationPath);
