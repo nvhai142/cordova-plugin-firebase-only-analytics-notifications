@@ -94,16 +94,11 @@ module.exports = function(context) {
   }
 
   var sourceFilePath = path.join(targetPath, gtmFile);
-  var destination = path.join(context.opts.projectRoot, destinationPath);
-  fs.copySync(sourceFilePath, destination);
+  var destPath = path.join(context.opts.projectRoot, destinationPath);
+  utils.createOrCheckIfFolderExists(destPath);
 
-  if (cordovaAbove7) {
-    var destPath = path.join(context.opts.projectRoot, destinationPath);
-    if (utils.createOrCheckIfFolderExists(destPath)) {
-      var destFilePath = path.join(destPath, gtmFile);
-      utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
-    }
-  }
+  var destFilePath = path.join(destPath, gtmFile);
+  utils.copyFromSourceToDestPath(defer, sourceFilePath, destFilePath);
   
   if (platform === 'ios') {
     var xcodeProjPath = fromDir('platforms/ios','.xcodeproj', false);
