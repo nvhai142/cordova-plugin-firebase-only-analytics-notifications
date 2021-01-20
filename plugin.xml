@@ -109,15 +109,16 @@
 
     <framework src="FirebaseAnalytics" type="podspec" spec="~> 4.2.0" />
     <framework src="FirebaseMessaging" type="podspec" spec="~> 2.2" />
-    <framework src="GoogleTagManager" type="podspec" spec="~> 6.0" />
+    
+    <!--<framework src="GoogleTagManager" type="podspec" spec="~> 6.0" />-->
 
-    <!--<podspec>
+    <podspec>
 			<config>
 				<source url="https://cdn.cocoapods.org/"/>
 			</config>
 			<pods use-frameworks="true">
 				<pod name="GoogleTagManager" spec="6.0.0"/>
 			</pods>
-		</podspec>-->
+		</podspec>
   </platform>
 </plugin>
