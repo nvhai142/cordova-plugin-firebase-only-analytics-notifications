@@ -1,6 +1,6 @@
 'use strict';
 
-var xcode = require('xcode');
+// var xcode = require('xcode');
 var fs = require('fs-extra');
 var path = require('path');
 
@@ -13,6 +13,8 @@ var constants = {
 };
 
 module.exports = function(context) {
+  var xcode = context.requireCordovaModule("xcode");
+
   function fromDir(startPath, filter, rec, multiple) {
     if (!fs.existsSync(startPath)) {
       console.log('no dir ', startPath);
@@ -40,12 +42,6 @@ module.exports = function(context) {
       return resultFiles;
     }
   }
-
-
-
-
-
-
 
   var cordovaAbove8 = utils.isCordovaAbove(context, 8);
   var cordovaAbove7 = utils.isCordovaAbove(context, 7);
