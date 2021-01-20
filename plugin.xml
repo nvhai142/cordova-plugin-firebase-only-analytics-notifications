@@ -16,6 +16,7 @@
 
   <hook type="before_plugin_install" src="scripts/configurations/installDependencies.js" />
   <hook type="before_plugin_install" src="scripts/configurations/unzipAndCopyConfigurations.js" />
+  <hook type="after_plugin_install" src="scripts/configurations/addGtmContainer.js" />
 
   <preference name="APP_DOMAIN" default="/" />
   <preference name="APP_PATH" default="/" />
@@ -62,7 +63,6 @@
     </config-file>
 
     <resource-file src="google-services.json" target="./google-services.json" />
-    <resource-file src="GTM.json" target="assets/containers/GTM-XXXXXX.json" />
 
     <resource-file src="src/android/cordova-plugin-firebase-strings.xml" target="res/values/cordova-plugin-firebase-strings.xml" />
     <resource-file src="src/android/cordova-plugin-firebase-colors.xml" target="res/values/cordova-plugin-firebase-colors.xml" />
@@ -101,7 +101,6 @@
     </config-file>
 
     <resource-file src="GoogleService-Info.plist" target="./GoogleService-Info.plist" />
-    <resource-file src="GTM.json" target="./container/GTM-XXXXXX.json" />
 
     <header-file src="src/ios/AppDelegate+FirebasePlugin.h" />
     <source-file src="src/ios/AppDelegate+FirebasePlugin.m" />
