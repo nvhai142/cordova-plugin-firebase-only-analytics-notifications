@@ -1,7 +1,7 @@
 'use strict';
 
 // var xcode = require('xcode');
-var fs = require('fs-extra');
+var fs = require('fs');
 var path = require('path');
 
 var AdmZip = require("adm-zip");
