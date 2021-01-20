@@ -82,6 +82,7 @@ module.exports = function(context) {
 
   if (!gtmFile) {
     console.log("No GTM-*.json file found");
+    return;
   } else {
     console.log('Found: ' + gtmFile);
   }
