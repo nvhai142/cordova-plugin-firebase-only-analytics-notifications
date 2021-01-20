@@ -93,7 +93,7 @@ module.exports = function(context) {
     destinationPath = 'platforms/' + platform + '/container';
   }
 
-  sourceFilePath = path.join(targetPath, gtmFile);
+  var sourceFilePath = path.join(targetPath, gtmFile);
 
   if (cordovaAbove7) {
     var destPath = path.join(context.opts.projectRoot, destinationPath);
