@@ -92,6 +92,9 @@
         <param name="ios-package" value="FirebasePlugin" />
         <param name="onload" value="true" />
       </feature>
+      <feature name="GoogleTagManager">
+        <param name="ios-package" value="GoogleTagManager"/>
+      </feature>
     </config-file>
     <config-file parent="aps-environment" target="*/Entitlements-Debug.plist">
       <string>development</string>
