@@ -59,50 +59,19 @@ static FirebasePlugin *firebasePlugin;
 - (void)getToken:(CDVInvokedUrlCommand *)command {
 //    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[FIRInstanceID instanceID] token]];
 //    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    CDVPluginResult *pluginResult;
-        NSString* type = [command.arguments objectAtIndex:0];
-
-        if ([type length] == 0) {
-            NSString *fcmToken = [FIRMessaging messaging].FCMToken;
-            if (fcmToken) {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:fcmToken];
-            } else {
-                [[FIRMessaging messaging] tokenWithCompletion:^(NSString * token, NSError * err) {
-                    CDVPluginResult *pluginResult;
-                    if (err) {
-                        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:err.localizedDescription];
-                    } else {
-                        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:token];
-                    }
-                    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-                }];
-            }
-        } else if ([type hasPrefix:@"apns-"]) {
-            NSData* apnsToken = [FIRMessaging messaging].APNSToken;
-            if (apnsToken) {
-                if ([type isEqualToString:@"apns-buffer"]) {
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArrayBuffer:apnsToken];
-                } else if ([type isEqualToString:@"apns-string"]) {
-                    NSUInteger len = apnsToken.length;
-                    const unsigned char *buffer = apnsToken.bytes;
-                    NSMutableString *hexToken  = [NSMutableString stringWithCapacity:(len * 2)];
-                    for (int i = 0; i < len; ++i) {
-                        [hexToken appendFormat:@"%02x", buffer[i]];
-                    }
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:hexToken];
-                } else {
-                    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid token type argument"];
-                }
-            } else {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
-            }
-        } else {
-            pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
+    NSData* apnsToken = [FIRMessaging messaging].APNSToken;
+    
+    if (apnsToken) {
+        NSUInteger len = apnsToken.length;
+        const unsigned char *buffer = apnsToken.bytes;
+        NSMutableString *hexToken  = [NSMutableString stringWithCapacity:(len * 2)];
+        for (int i = 0; i < len; ++i) {
+            [hexToken appendFormat:@"%02x", buffer[i]];
         }
-
-        if (pluginResult) {
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-        }
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:hexToken];
+    } else {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
+    }
 }
 
 - (void)hasPermission:(CDVInvokedUrlCommand *)command {
