@@ -59,6 +59,7 @@ static FirebasePlugin *firebasePlugin;
 - (void)getToken:(CDVInvokedUrlCommand *)command {
 //    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[FIRInstanceID instanceID] token]];
 //    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    CDVPluginResult *pluginResult;
     NSData* apnsToken = [FIRMessaging messaging].APNSToken;
     
     if (apnsToken) {
