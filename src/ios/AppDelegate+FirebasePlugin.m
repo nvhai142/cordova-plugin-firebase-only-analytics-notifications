@@ -64,12 +64,12 @@
     [FIRMessaging messaging].remoteMessageDelegate = self;
 #endif
 
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+   // [[UIApplication sharedApplication] registerForRemoteNotifications];
 
     [FIRApp configure];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
-                                                 name:kFIRInstanceIDTokenRefreshNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tokenRefreshNotification:)
+//                                                 name:kFIRInstanceIDTokenRefreshNotification object:nil];
     
     self.applicationInBackground = @(YES);
     
