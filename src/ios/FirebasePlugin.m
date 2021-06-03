@@ -57,22 +57,22 @@ static FirebasePlugin *firebasePlugin;
 }
 
 - (void)getToken:(CDVInvokedUrlCommand *)command {
-//    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[FIRInstanceID instanceID] token]];
-//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    CDVPluginResult *pluginResult;
-    NSData* apnsToken = [FIRMessaging messaging].APNSToken;
-    
-    if (apnsToken) {
-        NSUInteger len = apnsToken.length;
-        const unsigned char *buffer = apnsToken.bytes;
-        NSMutableString *hexToken  = [NSMutableString stringWithCapacity:(len * 2)];
-        for (int i = 0; i < len; ++i) {
-            [hexToken appendFormat:@"%02x", buffer[i]];
-        }
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:hexToken];
-    } else {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
-    }
+    CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[[FIRInstanceID instanceID] token]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+//    CDVPluginResult *pluginResult;
+//    NSData* apnsToken = [FIRMessaging messaging].APNSToken;
+//
+//    if (apnsToken) {
+//        NSUInteger len = apnsToken.length;
+//        const unsigned char *buffer = apnsToken.bytes;
+//        NSMutableString *hexToken  = [NSMutableString stringWithCapacity:(len * 2)];
+//        for (int i = 0; i < len; ++i) {
+//            [hexToken appendFormat:@"%02x", buffer[i]];
+//        }
+//        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:hexToken];
+//    } else {
+//        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:nil];
+//    }
 }
 
 - (void)hasPermission:(CDVInvokedUrlCommand *)command {
